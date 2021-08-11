@@ -5,27 +5,20 @@ let a = {};
 
 xp = location.href;
 if (xp.includes("meet.google.com")) {
-    setTimeout(joinmeeting, 2000);
+    setTimeout(joinmeeting, 1000);
 }
 
 function joinmeeting() {
     if (document.readyState == "complete") {
         try {
             // Mic Button
-            window.document.querySelectorAll(".DPvwYc.JnDFsc.dMzo5")[0].click();
+            window.document.querySelectorAll(".U26fgb")[0].click();
             // Webcam Button
-            window.document.querySelectorAll(".DPvwYc.JnDFsc.dMzo5")[1].click();
+            window.document.querySelectorAll(".U26fgb")[1].click();
+            window.document.querySelector(".NPEfkd").click();
         } catch (err) {
             console.log("EROOR");
         }
-        setTimeout(joinmeet, 5500);
-    }
-}
-function joinmeet() {
-    try {
-        window.document.querySelector(".NPEfkd").click();
-    } catch (error) {
-        console.log("ERROR");
     }
 }
 
@@ -63,7 +56,7 @@ chrome.runtime.onMessage.addListener(
 
         }
         if (request.message === "stopbtnclicked") {
-            console.log("Stop btn clicked")
+            console.log("Stop btn clicked");
         }
     }
 
@@ -71,11 +64,10 @@ chrome.runtime.onMessage.addListener(
 
 
 function checker() {
-    if (a.time == rtntime()) {
-        location.replace(a.link);
-    } else {
-        t = setTimeout(checker, 60000);
-    }
+    location.replace(a.link);
+    joinmeeting();
+    setTimeout(checker, (60 - new Date().getSeconds()) * 1000);
+    console.log("check");
 }
 
 // function leaver() {
